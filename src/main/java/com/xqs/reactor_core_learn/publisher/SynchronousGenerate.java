@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 
 public class SynchronousGenerate {
     public static void main(String[] args) {
-        generate_1();
+        generate_3();
     }
 
     /*
@@ -53,7 +53,7 @@ public class SynchronousGenerate {
         flux.subscribe(i -> System.out.println(i));
     }
 
-    public static void test3() {
+    public static void generate_3() {
         Flux<String> flux = Flux.generate(AtomicLong::new, (state, sink) -> {
             long i = state.getAndIncrement();
             sink.next("3 x " + i + " = " + 3 * i);
