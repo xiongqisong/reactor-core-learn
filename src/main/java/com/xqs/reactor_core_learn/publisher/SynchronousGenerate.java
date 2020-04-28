@@ -1,12 +1,14 @@
 package com.xqs.reactor_core_learn.publisher;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 import reactor.core.publisher.Flux;
 
 public class SynchronousGenerate {
     public static void main(String[] args) {
-        generate_3();
+        generate_4();
     }
 
     /*
@@ -62,5 +64,16 @@ public class SynchronousGenerate {
             return state;
         }, (state) -> System.out.println("state: " + state));
         flux.subscribe(i -> System.out.println(i));
+    }
+    
+    /*
+     * generate不支持每次循环生成多个元素，下面的code会抛出IllegalStateException异常，提示more than on call to onNext
+     */
+    public static void generate_4() {
+    	Flux.generate(sink->{
+    		for (int i = 0; i < 10; i++) {
+				sink.next(i);
+			}
+    	}).subscribe(i->System.out.println(i));
     }
 }

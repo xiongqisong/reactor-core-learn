@@ -7,6 +7,9 @@ public class AsynchronousCreate {
 		create_1();
 	}
 
+	/*
+	 * create支持每次循环生成多个元素
+	 */
 	private static void create_1() {
 		Flux<Integer> flux = Flux.<Integer>create((sink)->{
 			for (int i = 0; i < 10; i++) {
